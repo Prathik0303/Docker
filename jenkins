@@ -1,32 +1,46 @@
 pipeline {
     agent any
 
-stages {
+    stages {
         stage('Checkout') {
             steps {
-                // Use the HTTPS URL for the Git repository
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/Prathik0303/Docker.git']]])
+                // Cloning the repository
+                checkout scm
             }
         }
-        // Other stages of your pipeline
-    }
-  stages {
+
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image
-                    sh "docker build -t prathikm/dockerimage ."
+                    // Change to the directory where the Dockerfile is located
+                    dir('path/to/dockerfile') {
+                        // Build the Docker image
+                        sh 'docker build -t my-docker-image .'
+                    }
                 }
             }
         }
 
-        stage('Push Docker Image') {
+        stage('Push to Docker Hub') {
             steps {
                 script {
-                    // Push the Docker image to Docker Hub
-                    sh "docker push prathikm/dockerimage"
+                    // Docker Hub credentials stored in Jenkins credentials
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                        // Login to Docker Hub
+                        sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+
+                        // Push the Docker image to Docker Hub
+                        sh 'docker push my-docker-image'
+                    }
                 }
             }
+        }
+    }
+
+    // post {
+        // always {
+            // Clean up (optional)
+            // sh 'docker rmi my-docker-image'
         }
     }
 }
