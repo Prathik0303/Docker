@@ -15,7 +15,7 @@ pipeline {
                     // Change to the directory where the Dockerfile is located
                     dir('var/lib') {
                         // Build the Docker image
-                        sh 'docker build -t prathikm/image .'
+                        sh 'sudo docker build -t prathikm/image .'
                     }
                 }
             }
@@ -30,7 +30,7 @@ pipeline {
                         sh "docker login -u ${prathikm} -p ${Prathik007}"
 
                         // Push the Docker image to Docker Hub
-                        sh 'docker push my-docker-image'
+                        sh 'sudo docker push my-docker-image'
                     }
                 }
             }
