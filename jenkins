@@ -37,10 +37,4 @@ pipeline {
         }
     }
 
-    // post {
-        // always {
-            // Clean up (optional)
-            // sh 'docker rmi my-docker-image'
-        }
-    }
 }
