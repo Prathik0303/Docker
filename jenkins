@@ -9,17 +9,18 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+    stages {
+        stage('Build image') {
             steps {
+                echo 'Starting to build docker image'
+
                 script {
-                    // Change to the directory where the Dockerfile is located
-                    dir('/home') {
-                        // Build the Docker image
-                        sh 'docker build -t prathikm/image .'
-                    }
+                    def customImage = docker.build("my-image:${env.BUILD_ID}")
+                    customImage.push()
                 }
             }
         }
+    }
 
         // Other stages...
 
