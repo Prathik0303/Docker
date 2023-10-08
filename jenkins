@@ -14,7 +14,7 @@ pipeline {
                 script {
                     dir('var/lib/docker') {
                         // Build the Docker image
-                        sh 'sudo docker build -t prathikm/image .'
+                        sh 'docker build -t prathikm/image .'
                     }
                 }
             }
