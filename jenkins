@@ -12,13 +12,16 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dir('/home') {
+                    // Change to the directory where the Dockerfile is located
+                    dir('path/to/dockerfile') {
                         // Build the Docker image
                         sh 'docker build -t prathikm/image .'
                     }
                 }
             }
         }
+
+        // Other stages...
 
         stage('Push to Docker Hub') {
             steps {
@@ -29,11 +32,10 @@ pipeline {
                         sh "docker login -u ${prathikm} -p ${Prathik007}"
 
                         // Push the Docker image to Docker Hub
-                        sh 'sudo docker push my-docker-image'
+                        sh 'docker push prathikm/image'
                     }
                 }
             }
         }
     }
-
 }
