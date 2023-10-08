@@ -16,7 +16,7 @@ stages {
             steps {
                 script {
                     // Build the Docker image
-                    sh "docker build -t your-dockerhub-username/your-image-name ."
+                    sh "docker build -t prathikm/dockerimage ."
                 }
             }
         }
@@ -25,7 +25,7 @@ stages {
             steps {
                 script {
                     // Push the Docker image to Docker Hub
-                    sh "docker push your-dockerhub-username/your-image-name"
+                    sh "docker push prathikm/dockerimage"
                 }
             }
         }
