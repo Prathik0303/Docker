@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Change to the directory where the Dockerfile is located
-                    dir('path/to/dockerfile') {
+                    dir('/home') {
                         // Build the Docker image
                         sh 'docker build -t prathikm/image .'
                     }
