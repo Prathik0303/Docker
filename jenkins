@@ -9,20 +9,29 @@ pipeline {
             }
         }
 
-     stages {
-        stage('Build image') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Starting to build docker image'
-
                 script {
-                    def customImage = docker.build("my-image:${env.BUILD_ID}")
-                    customImage.push()
+                    // Change to the directory where the Dockerfile is located
+                    dir('path/to/dockerfile') {
+                        // Build the Docker image
+                        sh 'docker build -t prathikm/image .'
+                    }
                 }
             }
         }
-    }
 
-        // Other stages...
+        stage('Build with Maven') {
+            steps {
+                script {
+                    // Change to the directory where your Maven project is located
+                    dir('path/to/maven/project') {
+                        // Build your Maven project
+                        sh 'mvn clean package'
+                    }
+                }
+            }
+        }
 
         stage('Push to Docker Hub') {
             steps {
