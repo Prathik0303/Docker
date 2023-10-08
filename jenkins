@@ -10,8 +10,7 @@ stages {
         }
         // Other stages of your pipeline
     }
-
-    stages {
+  stages {
         stage('Build Docker Image') {
             steps {
                 script {
