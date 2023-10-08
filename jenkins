@@ -13,9 +13,9 @@ pipeline {
             steps {
                 script {
                     // Change to the directory where the Dockerfile is located
-                    dir('path/to/dockerfile') {
+                    dir('var/lib') {
                         // Build the Docker image
-                        sh 'docker build -t my-docker-image .'
+                        sh 'docker build -t prathikm/image .'
                     }
                 }
             }
@@ -27,7 +27,7 @@ pipeline {
                     // Docker Hub credentials stored in Jenkins credentials
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                         // Login to Docker Hub
-                        sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+                        sh "docker login -u ${prathikm} -p ${Prathik007}"
 
                         // Push the Docker image to Docker Hub
                         sh 'docker push my-docker-image'
