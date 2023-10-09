@@ -12,23 +12,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Change to the directory where the Dockerfile is located
-                    dir('path/to/dockerfile') {
-                        // Build the Docker image
-                        sh 'docker build -t prathikm/image .'
-                    }
-                }
-            }
-        }
-
-        stage('Build with Maven') {
-            steps {
-                script {
-                    // Change to the directory where your Maven project is located
-                    dir('path/to/maven/project') {
-                        // Build your Maven project
-                        sh 'mvn clean package'
-                    }
+                    // Build the Docker image using the Dockerfile in the repository
+                    sh 'docker build -t prathikm/image .'
                 }
             }
         }
@@ -48,4 +33,5 @@ pipeline {
             }
         }
     }
+
 }
