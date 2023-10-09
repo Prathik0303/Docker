@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image using the Dockerfile in the repository
-                    sh 'docker build -t prathikm/image .'
+                    sh 'docker build -t prathikm/docker .'
                 }
             }
         }
