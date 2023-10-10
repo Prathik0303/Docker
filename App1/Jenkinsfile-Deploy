@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Pull') {
+            steps {
+                sh 'docker pull prathikm/prathik'          
+            }
+        }
+        stage('Run') {
+            steps {
+                sh 'docker run -d --name prathik -p 3000:3000 prathikm/prathik'
+            }
+        }
+    }
+}
