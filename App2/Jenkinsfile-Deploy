@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Run') {
             steps {
-                sh 'docker run -d --name prathik -p 3000:5000 prathikm/marineni'
+                sh 'docker run -d --name marineni -p 3000:5000 prathikm/marineni'
             }
         }
     }
