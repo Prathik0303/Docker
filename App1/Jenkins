@@ -7,11 +7,6 @@ pipeline {
                 sh 'docker pull prathikm/prathik'          
             }
         }
-        stage('Run') {
-            steps {
-                sh 
-            }
-        }
         stage('Deploy Docker Container on Target EC2') {
             steps {
                 script {
