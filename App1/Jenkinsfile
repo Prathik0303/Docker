@@ -11,7 +11,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t prathikm/prathik Docker/App1/'
+                    sh 'docker build -t prathikm/prathik App1/'
                 }
             }
         }
