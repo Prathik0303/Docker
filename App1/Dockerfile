@@ -3,7 +3,7 @@ FROM node:20-alpine
 WORKDIR /prathik/app/
 
 COPY package.json .
-COPY helloworld.js .
+COPY prathik.js .
 
 RUN npm install
 
