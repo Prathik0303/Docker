@@ -7,8 +7,8 @@ pipeline {
                 script {
               sshagent(credentials: ['Ec2']) {
                         sh '''
-                            ssh -o ec2-user@3.82.43.167 "docker pull prathikm/prathik"
-                            ssh -o ec2-user@3.82.43.167 "docker run -d --name prathik -p 3000:3000 prathikm/prathik"
+                            ssh -o StrictHostKeyChecking=no -i ec2-user@3.82.43.167 "docker pull prathikm/prathik"
+                            ssh -o StrictHostKeyChecking=no -i ec2-user@3.82.43.167 "docker run -d --name prathik -p 3000:3000 prathikm/prathik"
                         '''
                    }
                 }
