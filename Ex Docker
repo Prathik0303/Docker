@@ -1,0 +1,26 @@
+
+FROM ubuntu
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.5 \
+    python3-pip \
+    && \
+apt-get clean && \
+rm -rf /var/lib/apt/lists/*
+CMD ["echo","image created"]
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Pull') {
+            steps {
+                sh 'docker pull prathikm/prathik'          
+            }
+        }
+        stage('Run') {
+            steps {
+                sh 'docker run -d --name prathik -p 3000:3000 prathikm/prathik'
+            }
+        }
+    }
+}
