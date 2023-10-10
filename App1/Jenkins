@@ -9,7 +9,18 @@ pipeline {
         }
         stage('Run') {
             steps {
-                sh 'docker run -d --name prathik -p 3000:3000 prathikm/prathik'
+                sh 
+            }
+        }
+        stage('Deploy Docker Container on Target EC2') {
+            steps {
+                script {
+                    sshagent(credentials: ['Ec2']) {
+                        sh '''
+                            ssh -i "All.pem" ec2-user@ec2-3-82-43-167.compute-1.amazonaws.com "docker pull prathikm/prathik"
+                            ssh -i "All.pem" ec2-user@ec2-3-82-43-167.compute-1.amazonaws.com "docker run -d --name prathik -p 3000:3000 prathikm/prathik"
+                    }
+                }
             }
         }
     }
