@@ -2,16 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Deploy Docker Container on Target EC2') {
+             stage('Deploy') {
             steps {
                 script {
                     sshagent(credentials: ['Ec2']) {
-                        sh '''
-                            ssh -i "/tmp/All.pem" ec2-user@ec2-3-82-43-167.compute-1.amazonaws.com "docker pull prathikm/prathik"
-                            ssh -i "/tmp/All.pem" ec2-user@ec2-3-82-43-167.compute-1.amazonaws.com "docker run -d --name prathik -p 3000:3000 prathikm/prathik"'''
+                        sh 'ssh ec2-user@3.82.43.167 "docker pull prathikm/prathik"'
+                        sh 'ssh ec2-user@3.82.43.167 "docker run -d --name prathik -p 3000:3000 prathikm/prathik"'
                     }
                 }
             }
         }
-    }
+    }   
 }
