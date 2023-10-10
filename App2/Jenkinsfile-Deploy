@@ -2,15 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Pull') {
+             stage('Deploy') {
             steps {
-                sh 'docker pull prathikm/marineni'          
+                script {
+              sshagent(credentials: ['Ec2']) {
+                        sh '''
+                            ssh -o StrictHostKeyChecking=no -i "/tmp/All.pem" ec2-user@3.82.43.167 "docker pull prathikm/marineni"
+                            ssh -o StrictHostKeyChecking=no -i "/tmp/All.pem" ec2-user@3.82.43.167 "docker run -d --name marineni -p 5000:3000 prathikm/marineni"
+                        '''
+                   }
+                }
             }
         }
-        stage('Run') {
-            steps {
-                sh 'docker run -d --name marineni -p 5000:3000 prathikm/marineni'
-            }
-        }
-    }
+    }   
 }
