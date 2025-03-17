@@ -16,7 +16,7 @@ pipeline {
             }
         }
 
-                stage('Build Docker Image') {
+                stage('Run Docker Image') {
             steps {
                 script {
                     sh 'docker run -p 5000:5000 prathikm/marineni'
