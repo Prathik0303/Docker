@@ -16,7 +16,13 @@ pipeline {
             }
         }
 
-        
+                stage('Build Docker Image') {
+            steps {
+                script {
+                    sh 'docker run -p 5000:5000 prathikm/marineni'
                     }
                 }
+            }
+        }
+    }
             
